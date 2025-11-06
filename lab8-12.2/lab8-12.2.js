@@ -1183,15 +1183,15 @@ SnailBait.prototype = {
          this.velocityY = initialVelocity || 0;
          this.initialVelocityY = initialVelocity || 0;
          this.fallTimer.start(
-            snailBait.timeSystem.calculateGameTime());
+         snailBait.timeSystem.calculateGameTime());
       };
 
       this.runner.stopFalling = function () {
-         console.log(this.velocityY);
+         console.log(`runner.stopFalling() => ${this.velocityY}`);
          this.falling = false;
          this.velocityY = 0;
          this.fallTimer.stop(
-            snailBait.timeSystem.calculateGameTime());
+         snailBait.timeSystem.calculateGameTime());
       };
    },
 

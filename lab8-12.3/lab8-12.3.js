@@ -683,6 +683,7 @@ var SnailBait = function () {
                          fps, 
                          context, 
                          lastAnimationFrameTime) {
+
          if (sprite.runAnimationRate === 0) {
             return;
          }
@@ -842,6 +843,7 @@ var SnailBait = function () {
       },
 
       finishAscent: function (sprite, now) {
+         snailBait.timeFactor = 0.3;
          sprite.jumpApex = sprite.top;
          sprite.ascendTimer.stop(now);
          sprite.descendTimer.start(now);
@@ -878,7 +880,11 @@ var SnailBait = function () {
 
       execute: function (sprite, now, fps, context, 
                          lastAnimationFrameTime) {
-         if ( ! sprite.jumping) {
+         if (!sprite.jumping) {
+            if (!sprite.falling){
+               snailBait.timeFactor = 1.0;
+            }
+
             return;
          }
 
@@ -1179,22 +1185,19 @@ SnailBait.prototype = {
       this.runner.fallTimer = new AnimationTimer();
 
       this.runner.fall = function (initialVelocity) {
+         snailBait.timeFactor = 0.3;
          this.falling = true;
          this.velocityY = initialVelocity || 0;
          this.initialVelocityY = initialVelocity || 0;
          this.fallTimer.start(
-            snailBait.timeSystem.calculateGameTime());
-         snailBait.setTimeRate(0.1);
-         console.log(this.initialVelocityY);
+         snailBait.timeSystem.calculateGameTime());
       };
 
       this.runner.stopFalling = function () {
-         console.log(this.velocityY);
          this.falling = false;
          this.velocityY = 0;
          this.fallTimer.stop(
-            snailBait.timeSystem.calculateGameTime());
-         snailBait.setTimeRate(1);
+         snailBait.timeSystem.calculateGameTime());
       };
    },
 
