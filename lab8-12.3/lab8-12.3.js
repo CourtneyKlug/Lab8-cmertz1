@@ -1185,7 +1185,6 @@ SnailBait.prototype = {
       this.runner.fallTimer = new AnimationTimer();
 
       this.runner.fall = function (initialVelocity) {
-         snailBait.timeFactor = 0.3;
          this.falling = true;
          this.velocityY = initialVelocity || 0;
          this.initialVelocityY = initialVelocity || 0;
